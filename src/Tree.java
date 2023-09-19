@@ -66,4 +66,55 @@ public class Tree {
         Tree t2 = new Tree("123", list);
         System.out.println(t2.count("123"));
     }
+
+//  no idea how to do this
+    public String __str__() {
+        return this._str_indented();
+    }
+
+    private String _str_indented(int depth) {
+        if (this.is_empty()) {
+            String p = "";
+            return p;
+        }
+        else {
+            String k = "  ";
+            String change_line = "\n";
+            String repeated = new String(new char[depth]).replace("\0", k);
+            String s = repeated + this.root.toString() + change_line;
+            for (Tree subtree: this.subtrees){
+                s += subtree._str_indented(depth + 1);
+            }
+            return s;
+        }
+    }
+
+    private String _str_indented() {
+        int d = 0;
+        if (this.is_empty()) {
+            String p = "";
+            return p;
+        }
+        else {
+            String k = "  ";
+            String change_line = "\n";
+            String repeated = new String(new char[d]).replace("\0", k);
+            String s = repeated + this.root.toString() + change_line;
+            for (Tree subtree: this.subtrees){
+                s += subtree._str_indented(d + 1);
+            }
+            return s;
+        }
+    }
+
+    // check how to make a tuple, and don't forget to create the average helper
+    public float average(){
+        if (this.is_empty()) {
+            return 0.0F;
+        }
+        else{
+            Pair<int, int> my_tuple = Pair.with (this._average_helper());
+            return my_tuple.getValue(0) / my_tuple.getValue(1);
+        }
+    }
 }
